@@ -4,6 +4,7 @@ import fs from 'fs'
 import type {Plugin} from 'vite'
 
 interface SvgrPluginOptions {
+  query?: string
   keepEmittedAssets?: boolean
   svgrOptions?: SVGROptions
 }
@@ -27,16 +28,18 @@ export default function svgrPlugin(options: SvgrPluginOptions = {}): Plugin {
     name: 'vite:svgr',
 
     async transform(code: any, id: string) {
-      if (id.indexOf('.svg') === -1) {
+      const svgFilePattern = options?.query ? `.svg?${options.query}` : '.svg'
+      if (id.indexOf(svgFilePattern) === -1) {
         return null
       }
 
       const svgrOptions = options?.svgrOptions ?? {}
-      const svgDataPath = id
+      const svgName = options?.query ? id.split(`?${options.query}`)[0] : id
+      const svgDataPath = svgName
       const svgData = await fs.promises.readFile(svgDataPath, 'utf8')
       const componentCode = await transformSvgr(svgData, svgrOptions, {filePath: svgDataPath})
       const component = await transform(componentCode, {loader: 'jsx'})
-      transformed.push(`${id}?component`)
+      transformed.push(`${svgName}?component`)
 
       return {code: component.code, map: null}
     },

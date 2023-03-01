@@ -75,6 +75,28 @@ If you are using this plugin in a Typescript project, adding the type definition
 
 <br />
 
+### `query`
+
+If you want to import only some components as React components, and import other ones as standard string resource path, you can use the `query` option:
+
+```js
+export default defineConfig({
+    //...
+    query: 'as-react-component'
+});
+```
+
+In your jsx/tsx file:
+
+```jsx
+import MyReactSvg from './my_svg.svg?as-react-component'
+import MySvg from './my_svg'
+…
+
+<MyReactSvg /> // This one is treated as a react component
+<img src={MySvg} /> // This one is imported as a resource path
+```
+
 ### `keepEmittedAssets`
 
 By default, the plugin will prevent transformed SVG assets to be emitted when building the production bundle (when using Vite 2.5.0 or later). If you want or need to have those files emitted anyway, pass the `{keepEmittedAssets: true}` option:
