@@ -1,6 +1,6 @@
 {
   "name": "@andylacko/vite-svg-react-loader",
-  "version": "3.0.5",
+  "version": "3.0.16",
   "description": "Vite plugin to transform SVGs into React components by default using svgr.",
   "author": "Andy Lacko",
   "license": "MIT",
