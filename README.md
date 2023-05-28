@@ -1,9 +1,16 @@
 <br /><br />
+
 <p align="center">
 <img src="assets/svg.svg" width="500" align="center" alt="vite-svg-react-loader" />
 </p>
 <br /><br />
 
+# THIS PLUGIN IS DEPRECATED
+
+found plugin working with default component imports
+https://github.com/pd4d10/vite-plugin-svgr
+
+<br />
 # vite-svg-react-loader
 
 Vite plugin to import SVG files directly as ReactComponent
@@ -34,9 +41,9 @@ Add `svgLoader()` (or whatever you decide to name your default import) to the li
 import svgLoader from '@andylacko/vite-svg-react-loader'
 
 export default defineConfig({
-    //...
-    plugins: [svgLoader()]
-});
+  //...
+  plugins: [svgLoader()],
+})
 ```
 
 Once you have done that, you can import any of your SVG asset as a React component:
@@ -47,11 +54,11 @@ import SVGAsset from 'assets/yourMama.svg'
 
 // That you can use normally
 function SomeComponent() {
-    return (
-        <button>
-            <SVGAsset /> Click Me!
-        </button>
-    );
+  return (
+    <button>
+      <SVGAsset /> Click Me!
+    </button>
+  )
 }
 ```
 
@@ -63,9 +70,9 @@ If you are using this plugin in a Typescript project, adding the type definition
 
 ```json
 {
-    "compilerOptions": {
-        "types": [ "@andylacko/vite-svg-react-loader/svgType" ]
-    }
+  "compilerOptions": {
+    "types": ["@andylacko/vite-svg-react-loader/svgType"]
+  }
 }
 ```
 
@@ -81,9 +88,9 @@ If you want to import only some components as React components, and import other
 
 ```js
 export default defineConfig({
-    //...
-    query: 'as-react-component'
-});
+  //...
+  query: 'as-react-component',
+})
 ```
 
 In your jsx/tsx file:
@@ -103,9 +110,9 @@ By default, the plugin will prevent transformed SVG assets to be emitted when bu
 
 ```js
 export default defineConfig({
-    //...
-    plugins: [svgr({ keepEmittedAssets: true })]
-});
+  //...
+  plugins: [svgr({keepEmittedAssets: true})],
+})
 ```
 
 <br />
@@ -116,17 +123,17 @@ Allows to pass global svgr configuration flags. See svgr [configuration document
 
 ```ts
 export default defineConfig({
-    //...
-    plugins: [
-        svgr({
-            svgrOptions: {
-                icon: true,
-                dimensions: false
-                // etc...
-            }
-        })
-    ]
-});
+  //...
+  plugins: [
+    svgr({
+      svgrOptions: {
+        icon: true,
+        dimensions: false,
+        // etc...
+      },
+    }),
+  ],
+})
 
 // for quick overview
 interface SVGROptions {
